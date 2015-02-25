@@ -1,0 +1,7 @@
+{
+  "mongo" : "mongodb://azai91:$hackreactor&@ds031271.mongolab.com:31271/icecommusers",
+  "mail" : {
+    "api_user": "TawnyOwl",
+    "api_key": "$hackreactor&1"
+  }
+}
