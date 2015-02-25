@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var mongoose = require('mongoose');
 var config = require('config');
 var Stat = require('./server/stat/statModel');
