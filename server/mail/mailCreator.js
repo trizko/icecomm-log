@@ -13,7 +13,6 @@ function createUpdateEmail(total, unique) {
     var subject = "Icecomm update Email";
     messageContent.text = text;
     messageContent.subject = subject;
-    messageContent.to = email;
 
     return messageContent;
 }

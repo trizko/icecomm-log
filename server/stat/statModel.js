@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var statsSchema = mongoose.Schema({
-  date: { type: String, required: true},
+  date: { type: Date, required: true},
   apiKey: {type: String},
   room: {type: String}
 });
