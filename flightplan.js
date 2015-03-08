@@ -1,8 +1,8 @@
 var plan = require('flightplan');
 
-var appName = 'icecomm-logging';
+var appName = 'icecomm-log';
 var username = 'azai91';
-var startFile = 'app.js';
+var startFile = 'server.js';
 
 var tmpDir = appName+'-' + new Date().getTime();
 
@@ -33,10 +33,14 @@ plan.target('production', [
 plan.local(function(local) {
   // uncomment these if you need to run a build on your machine first
   // local.log('Run build');
+  local.exec('git add -f client/lib');
+
 
   local.log('Copy files to remote hosts');
   var filesToCopy = local.exec('git ls-files', {silent: true});
   // rsync files to all the destination's hosts
+  local.exec('git rm -rf --cached client/lib');
+
   local.transfer(filesToCopy, '/tmp/' + tmpDir);
 });
 
@@ -51,7 +55,6 @@ plan.remote(function(remote) {
 
   remote.log('Reload application');
   remote.sudo('ln -snf ~/' + tmpDir + ' ~/'+appName, {user: username});
-  // remote.exec('sudo forever stop ~/'+appName+'/'+startFile, {failsafe: true});
-  // remote.exec('sudo forever start ~/'+appName+'/'+startFile);
-  // remote.exec('sudo restart icecomm');
+  remote.exec('sudo forever stop ~/'+appName+'/'+startFile, {failsafe: true});
+  remote.exec('sudo forever start ~/'+appName+'/'+startFile);
 });

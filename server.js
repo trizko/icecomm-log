@@ -12,5 +12,5 @@ app.use(express.static(__dirname + '/client'));
 app.use('/connections', statController.getConnections);
 app.use('/users', userController.getUsers);
 
-app.listen(3000);
+app.listen(80);
 // app.use('/users', userController.getUsers);
