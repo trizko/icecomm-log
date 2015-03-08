@@ -21,7 +21,6 @@ function getConnections(req, res) {
       payload.total = total;
       payload.unique = unique;
       payload.times = times;
-      console.log(times);
       res.status(200).send(payload);
     }
   });
