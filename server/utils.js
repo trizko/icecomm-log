@@ -8,14 +8,15 @@ var time_in_day = (60*60*24)*1000;
 
 //finds beginning of today
 function getLowerBound(number_of_days) {
-  var today = Date.now() - (Date.now() % (60*60*24*1000));
+  var today = getToday();
   var lower_bound = today - number_of_days * time_in_day;
+
   return new Date(lower_bound).toISOString();
 }
 
 function organizeByDay(stats, number_of_days, type) {
   //beginning of day
-  var today = Date.now() - (Date.now() % (60*60*24*1000));
+  var today = getToday();
   var results = [];
 
   var dateProperty = 'date';
@@ -27,15 +28,9 @@ function organizeByDay(stats, number_of_days, type) {
   var currentDay = today;
 
   for (var i = 0; i < number_of_days; i++) {
-
-    var array = _.filter(stats, function(index) {
-                  var date = Number(new Date(index[dateProperty]));
-                  if (date > today && date < today + time_in_day) {
-                    return index;
-                  }
-                });
-    today -= time_in_day;
+    var array = getStatsBetweenDates(stats, today, dateProperty);
     results.push(array.length);
+    today -= time_in_day;
   }
 
   return results.reverse();
@@ -54,6 +49,16 @@ function getTimes(number_of_days) {
   return results.reverse();
 }
 
+function getStatsBetweenDates(stats, today, dateProperty) {
+  return _.filter(stats,
+    function(index) {
+      var date = Number(new Date(index[dateProperty]));
+      if (date > today && date < today + time_in_day) {
+        return index;
+      }
+    });
+}
+
 function formatDateForC3(date) {
   var dateString = "";
   var year = date.getFullYear();
@@ -68,6 +73,10 @@ function formatDateForC3(date) {
   }
   dateString += year +'-' + month +'-' +day;
   return dateString;
+}
+
+function getToday() {
+  return Date.now() - (Date.now() % (60*60*24*1000));
 }
 
 module.exports = utils;
