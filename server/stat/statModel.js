@@ -6,4 +6,4 @@ var statsSchema = mongoose.Schema({
   room: {type: String}
 });
 
-module.exports = mongoose.model('Stats', statsSchema);
+module.exports = mongoose.model('Stat', statsSchema);

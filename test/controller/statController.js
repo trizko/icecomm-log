@@ -1,0 +1,1 @@
+var statController = require('../../server/stat/statController');
