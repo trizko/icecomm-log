@@ -55,6 +55,6 @@ plan.remote(function(remote) {
 
   remote.log('Reload application');
   remote.sudo('ln -snf ~/' + tmpDir + ' ~/'+appName, {user: username});
-  remote.exec('sudo forever stop ~/'+appName+'/'+startFile, {failsafe: true});
-  remote.exec('sudo forever start ~/'+appName+'/'+startFile);
+  remote.exec('cd ' +appName);
+  remote.exec('sudo restart icecomm-log');
 });
