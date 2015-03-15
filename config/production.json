@@ -1,4 +1,4 @@
 {
   "mongo" : "mongodb://azai91:$hackreactor&@ds031271.mongolab.com:31271/icecommusers",
-  "port" : 8000
+  "port" : 80
 }

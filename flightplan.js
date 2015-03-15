@@ -1,6 +1,6 @@
 var plan = require('flightplan');
 
-var appName = 'icecomm-log';
+var appName = 'icecomm-log1';
 var username = 'azai91';
 var startFile = 'server.js';
 
@@ -9,7 +9,7 @@ var tmpDir = appName+'-' + new Date().getTime();
 // configuration
 plan.target('staging', [
   {
-    host: 'icecomm-log.cloudapp.net',
+    host: 'icecomm-log1.cloudapp.net',
     username: username,
     agent: process.env.SSH_AUTH_SOCK
   }
@@ -17,7 +17,7 @@ plan.target('staging', [
 
 plan.target('production', [
   {
-    host: 'icecomm-log.cloudapp.net',
+    host: 'icecomm-log1.cloudapp.net',
     username: username,
     agent: process.env.SSH_AUTH_SOCK
   },
@@ -56,5 +56,5 @@ plan.remote(function(remote) {
   remote.log('Reload application');
   remote.sudo('ln -snf ~/' + tmpDir + ' ~/'+appName, {user: username});
   remote.exec('cd ' +appName);
-  remote.exec('sudo restart icecomm-log');
+  remote.exec('sudo restart logging');
 });

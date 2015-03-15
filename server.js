@@ -12,4 +12,4 @@ app.use(express.static(__dirname + '/client'));
 app.use('/connections', statController.getConnections);
 app.use('/users', userController.getUsers);
 
-app.listen(8000);
+app.listen(config.get('port'));
